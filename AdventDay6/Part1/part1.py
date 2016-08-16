@@ -1,4 +1,5 @@
 import sys
+import math
 
 def main(argv):
 	matrix = createMatrix(1000,1000)
@@ -41,6 +42,17 @@ def stripOutCoords(brokenInstruction):
 	instructionList[3] = int(brokenInstruction[2].split(',')[1])
 	return instructionList
 	
+def executeInstruction(matrix, instruction):
+	for x in range(instruction[1], instruction[3]+1):
+		for y in range(instruction[2], instruction[4]+1):
+			matrix[x][y] = setLight(matrix[x][y], instruction[0])
+
+def setLight(currentStatus, instruction):
+	if(1 == instruction):
+		return 1
+	if(0 == instruction):
+		return 0
+	return abs(currentStatus + instruction)
 	
 
 if __name__ == "__main__" : 
