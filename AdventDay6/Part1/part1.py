@@ -3,8 +3,15 @@ import math
 
 def main(argv):
 	matrix = createMatrix(1000,1000)
-	instructions = readInInstructions(argv[0])
-	
+	print("created Matrix")
+	fileInstructions = readInInstructions(argv[0])
+	print("Read Instruction set")
+	for indiInstruction in fileInstructions:
+		executeInstruction(matrix, interpretInstructions(indiInstruction))
+	print("Set all lights, beginning counting")
+	print(isLit(matrix, 0, 0, 999, 999))
+
+
 def createMatrix(width, height):
 	matrix = [[0 for x in range(width)] for x in range(height)]
 	return matrix
@@ -53,6 +60,15 @@ def setLight(currentStatus, instruction):
 	if(0 == instruction):
 		return 0
 	return abs(currentStatus + instruction)
+
+def isLit(matrix, x1, y1, x2, y2):
+    count = 0
+    for x in range(x1, x2+1):
+        for y in range(y1, y2+1):
+            count += matrix[x][y]
+
+    return count
+
 	
 
 if __name__ == "__main__" : 
